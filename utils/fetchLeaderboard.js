@@ -8,16 +8,16 @@ const fetchLeaderboardData = async () => {
             }
         });
         if (!response.ok) {
-            throw new Error(`Failed to fetch data: ${response.statusText}`);
+            const errorMessage = await response.text(); 
+            console.error(`Response Error (${response.status}):`, errorMessage);
+            throw new Error(`Failed to fetch data: ${response.statusText} (${response.status}) - ${errorMessage}`);
         }
 
-        const data = await response.json();
-        return data.data || [];
+        return await response.json();
     } catch (error) {
-        console.error('Error fetching top donors:', error.message);
-        return [];
+        throw new Error(`Failed to fetch leaderboard data: ${error.message}`);
     }
-}
+};
 
 
 module.exports = { fetchLeaderboardData };
