@@ -1,7 +1,7 @@
-const fetch = require('node-fetch');
 
 const fetchLeaderboardData = async () => {
     try {
+        const fetch = (await import('node-fetch')).default;
         const response = await fetch(`https://backend.saweria.co/widgets/leaderboard/all`, {
             headers: {
                 'Stream-Key': 'b0fc98333cc6becdd18dceef7687ff82', 
